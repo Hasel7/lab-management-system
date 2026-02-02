@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     {
       icon: LayoutDashboard,
       label: "Dashboard",
-      path: "/",
+      path: "/dashboard",
     },
     { icon: Users, label: "Patients", path: "/patients" },
     {
@@ -153,7 +153,11 @@ const Sidebar = ({ isOpen, onClose }) => {
 
         {/* Footer / User Profile */}
         <div className="p-4 border-t border-slate-800">
-          <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/50 transition-colors cursor-pointer group">
+          <NavLink
+            to="/"
+            onClick={() => onClose()}
+            className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/50 transition-colors cursor-pointer group"
+          >
             <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-white font-medium">
               JD
             </div>
@@ -161,12 +165,10 @@ const Sidebar = ({ isOpen, onClose }) => {
               <h4 className="text-sm font-medium text-slate-200 truncate">
                 Dr. Jane Doe
               </h4>
-              <p className="text-xs text-slate-500 truncate">
-                Lab Administrator
-              </p>
+              <p className="text-xs text-slate-500 truncate">Log Out</p>
             </div>
             <LogOut className="w-5 h-5 text-slate-500 group-hover:text-slate-300 transition-colors" />
-          </div>
+          </NavLink>
         </div>
       </div>
     </>
