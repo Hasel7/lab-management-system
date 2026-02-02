@@ -75,9 +75,17 @@ const SampleTracking = () => {
   // Handle Input Change
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+    let finalValue;
+
+    if (type === "checkbox") {
+      finalValue = checked;
+    } else {
+      finalValue = value;
+    }
+
     setNewSample((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: finalValue,
     }));
   };
 
@@ -263,7 +271,7 @@ const SampleTracking = () => {
 
                 <span
                   className={`px-4 py-1.5 rounded-full text-sm font-medium ${getStatusColor(
-                    sample.status
+                    sample.status,
                   )}`}
                 >
                   {sample.status}
