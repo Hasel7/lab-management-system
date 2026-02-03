@@ -68,6 +68,14 @@ const Patients = () => {
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter Patients
+  const filteredPatients = patients.filter((patient) =>
+    Object.values(patient).some((value) =>
+      value.toString().toLowerCase().includes(searchQuery.toLowerCase()),
+    ),
+  );
 
   // Form Data
   const [formData, setFormData] = useState({
@@ -139,6 +147,8 @@ const Patients = () => {
             <input
               type="text"
               placeholder="Search patients..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-9 pr-4 py-2 border border-slate-200 rounded-lg w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 text-sm"
             />
           </div>
@@ -171,7 +181,7 @@ const Patients = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {patients.map((patient) => (
+              {filteredPatients.map((patient) => (
                 <tr
                   key={patient.id}
                   className="hover:bg-slate-50 transition-colors"
@@ -208,7 +218,7 @@ const Patients = () => {
                   <td className="px-6 py-4">
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
-                        patient.status
+                        patient.status,
                       )}`}
                     >
                       {patient.status}
